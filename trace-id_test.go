@@ -28,12 +28,12 @@ func TestServeHTTP(t *testing.T) {
 		{
 			name: "custom name",
 			config: &Config{
-				HeaderName: "X-Trace-Id",
+				HeaderName: "Other-Name",
 			},
 			assertFunc: func(t *testing.T) http.Handler {
 				t.Helper()
 				return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
-					hdr := getTraceIdHeader(t, req, "X-Trace-Id")
+					hdr := getTraceIdHeader(t, req, "Other-Name")
 					mustHaveLength(t, hdr, 36)
 				})
 			},
