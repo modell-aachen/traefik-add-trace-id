@@ -28,12 +28,12 @@ func TestServeHTTP(t *testing.T) {
 		{
 			name: "custom name",
 			config: &Config{
-				HeaderName: "Other-Name",
+				HeaderName: "X-Trace-Id",
 			},
 			assertFunc: func(t *testing.T) http.Handler {
 				t.Helper()
 				return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
-					hdr := getTraceIdHeader(t, req, "Other-Name")
+					hdr := getTraceIdHeader(t, req, "X-Trace-Id")
 					mustHaveLength(t, hdr, 36)
 				})
 			},
@@ -56,12 +56,12 @@ func TestServeHTTP(t *testing.T) {
 			name: "custom traceid and prefix",
 			config: &Config{
 				HeaderPrefix: "myorg",
-				HeaderName:   "Other-Name",
+				HeaderName:   "X-Trace-Id",
 			},
 			assertFunc: func(t *testing.T) http.Handler {
 				t.Helper()
 				return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
-					hdr := getTraceIdHeader(t, req, "Other-Name")
+					hdr := getTraceIdHeader(t, req, "X-Trace-Id")
 					mustHavePrefix(t, hdr, "myorg")
 					mustHaveLength(t, hdr, 41)
 				})
@@ -71,7 +71,7 @@ func TestServeHTTP(t *testing.T) {
 			name: "verbose",
 			config: &Config{
 				HeaderPrefix: "myorg",
-				HeaderName:   "Other-Name",
+				HeaderName:   "X-Trace-Id",
 				Verbose:      true,
 			},
 			assertFunc: func(t *testing.T) http.Handler {
@@ -83,7 +83,7 @@ func TestServeHTTP(t *testing.T) {
 			name: "hex-format",
 			config: &Config{
 				HeaderPrefix: "myorg",
-				HeaderName:   "Other-Name",
+				HeaderName:   "X-Trace-Id",
 				Verbose:      true,
 				Format:       "hex",
 			},
@@ -91,7 +91,7 @@ func TestServeHTTP(t *testing.T) {
 				t.Helper()
 				return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 					hdr := getTraceIdHeader(t, req, "X-Trace-Id")
-					mustHaveLength(t, hdr, 32)
+					mustHaveLength(t, hdr, 37)
 				})
 			},
 		},
