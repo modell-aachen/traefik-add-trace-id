@@ -6,3 +6,4 @@ testData:
   headerName: 'X-Trace-Id'
   headerPrefix: ''
   verbose: false
+  format: 'uuid'
