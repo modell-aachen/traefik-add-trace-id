@@ -79,6 +79,22 @@ func TestServeHTTP(t *testing.T) {
 				return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {})
 			},
 		},
+		{
+			name: "hex-format",
+			config: &Config{
+				HeaderPrefix: "",
+				HeaderName:   "X-Trace-Id",
+				Verbose:      true,
+				Format:       "hex",
+			},
+			assertFunc: func(t *testing.T) http.Handler {
+				t.Helper()
+				return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+					hdr := getTraceIdHeader(t, req, "X-Trace-Id")
+					mustHaveLength(t, hdr, 32)
+				})
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
