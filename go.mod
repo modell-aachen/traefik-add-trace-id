@@ -1,3 +1,3 @@
-module github.com/trinnylondon/traefik-add-trace-id
+module github.com/modell-aachen/traefik-add-trace-id
 
 go 1.15

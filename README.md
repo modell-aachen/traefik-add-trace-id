@@ -14,7 +14,7 @@ For compatibility reason one can choose the tarceid format to be uuid or hex.
 Enable the plugin in your Traefik configuration:
 ```
 [experimental.plugins.traceid]
-  modulename = "github.com/trinnylondon/traefik-add-trace-id"
+  modulename = "github.com/modell-aachen/traefik-add-trace-id"
   version = "v0.1.3"
 ```
 
